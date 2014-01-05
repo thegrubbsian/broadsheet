@@ -1,3 +1,6 @@
 .bundle/
 log/*.log
 pkg/
+
+# dummy app
+spec/dummy/log
