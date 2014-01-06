@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20140105013344) do
 
   create_table "broadsheet_assets", force: true do |t|
     t.string   "name"
-    t.string   "slug"
+    t.string   "uuid"
     t.string   "asset_type"
     t.string   "file"
     t.datetime "created_at"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140105013344) do
   create_table "broadsheet_layouts", force: true do |t|
     t.string   "name"
     t.text     "markup"
+    t.string   "format"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,20 +65,11 @@ ActiveRecord::Schema.define(version: 20140105013344) do
     t.datetime "updated_at"
   end
 
-  create_table "broadsheet_pages", force: true do |t|
-    t.string   "name"
-    t.string   "url"
-    t.string   "slug"
-    t.text     "body"
-    t.integer  "layout_id"
-    t.string   "rendering_engine"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "broadsheet_partials", force: true do |t|
     t.string   "name"
+    t.string   "slug"
     t.text     "markup"
+    t.string   "format"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,7 +79,7 @@ ActiveRecord::Schema.define(version: 20140105013344) do
     t.string   "slug"
     t.datetime "publish_at"
     t.text     "body"
-    t.string   "rendering_engine"
+    t.string   "format"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -101,7 +93,6 @@ ActiveRecord::Schema.define(version: 20140105013344) do
 
   create_table "broadsheet_stylesheets", force: true do |t|
     t.string   "name"
-    t.string   "slug"
     t.text     "styles"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -113,5 +104,18 @@ ActiveRecord::Schema.define(version: 20140105013344) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "broadsheet_views", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.string   "url"
+    t.text     "markup"
+    t.integer  "layout_id"
+    t.string   "format"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "broadsheet_views", ["url"], name: "index_broadsheet_views_on_url", unique: true
 
 end

@@ -16,11 +16,12 @@ Gem::Specification.new do |gem|
   gem.test_files = Dir["spec/**/*"]
 
   gem.add_dependency "rails", "~> 4.0.2"
+  gem.add_dependency "haml-rails", "~> 0.5.3"
 
-  gem.add_development_dependency "pg"
   gem.add_development_dependency "rspec-rails"
   gem.add_development_dependency "capybara"
   gem.add_development_dependency "factory_girl_rails"
   gem.add_development_dependency "database_cleaner"
   gem.add_development_dependency "sqlite3"
+  gem.add_development_dependency "pry-rails"
 end

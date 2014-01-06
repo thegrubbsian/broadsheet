@@ -3,7 +3,7 @@ class InitialMigration < ActiveRecord::Migration
   def change
     create_table :broadsheet_assets do |t|
       t.string :name
-      t.string :slug
+      t.string :uuid
       t.string :asset_type # image, video, pdf, download
       t.string :file
       t.timestamps
@@ -11,7 +11,6 @@ class InitialMigration < ActiveRecord::Migration
 
     create_table :broadsheet_stylesheets do |t|
       t.string :name
-      t.string :slug
       t.text :styles
       t.timestamps
     end
@@ -25,24 +24,29 @@ class InitialMigration < ActiveRecord::Migration
     create_table :broadsheet_layouts do |t|
       t.string :name
       t.text :markup
+      t.string :format
       t.timestamps
     end
 
     create_table :broadsheet_partials do |t|
       t.string :name
+      t.string :slug
       t.text :markup
+      t.string :format
       t.timestamps
     end
 
-    create_table :broadsheet_pages do |t|
+    create_table :broadsheet_views do |t|
       t.string :name
-      t.string :url
       t.string :slug
-      t.text :body
+      t.string :url
+      t.text :markup
       t.integer :layout_id
-      t.string :rendering_engine
+      t.string :format
       t.timestamps
     end
+
+    add_index :broadsheet_views, :url, unique: true
 
     create_table :broadsheet_authors do |t|
       t.string :first_name
@@ -79,7 +83,7 @@ class InitialMigration < ActiveRecord::Migration
       t.string :slug
       t.datetime :publish_at
       t.text :body
-      t.string :rendering_engine
+      t.string :format
       t.timestamps
     end
 
